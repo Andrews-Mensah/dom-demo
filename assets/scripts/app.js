@@ -1,8 +1,8 @@
 let modal = document.querySelector("#add-modal")
 let movieBtn = document.querySelector(".add-movie")
 let backdrop = document.querySelector ("#backdrop")
-let cancelBtn = document.querySelector (".btn--passive")
-let addBtn = document.querySelector (".btn--success")
+let cancelBtn = modal.querySelector (".btn--passive")
+let addBtn = modal.querySelector (".btn--success")
 let movieDB = []
 
 
@@ -10,6 +10,8 @@ const addMovie = () => {
     
     modal.classList.add("visible")
     backdropToggle()
+    disPlay()
+    movieRendering ()
 }
 
 const backdropToggle = () => {
@@ -70,10 +72,39 @@ const clear_input = () => {
 
 
 
+
+
 movieBtn.addEventListener("click", addMovie)
 backdrop.addEventListener("click", backdropHide)
 cancelBtn.addEventListener("click", cancelBTN)
 addBtn.addEventListener("click", addBTN)
+
+
+const disPlay = () => {
+    if (movieDB.length > 0){
+        document.getElementById ("entry-text").style.display = "none"
+    }
+}
+
+const movieRendering = (movieTitle, movieImage, movieRating) => {
+    const listMovie = document.createElement("li");
+    listMovie.className = "movie-element"
+
+    listMovie.innerHTML = `
+        <div class="movie-element__image">
+            <img src="${movieImage}" alt="${movieTitle}>
+        </div>
+
+        <div class="movie-element__info">
+            <h2> ${movieTitle} </h2>
+            <p> ${movieRating}/5 stars </p>
+        </div>
+
+        document.getElementById("movie-list").appendChild(listMovie)
+    `
+
+
+}
 
 
 
