@@ -3,6 +3,7 @@ let movieBtn = document.querySelector(".add-movie")
 let backdrop = document.querySelector ("#backdrop")
 let cancelBtn = document.querySelector (".btn--passive")
 let addBtn = document.querySelector (".btn--success")
+let movieDB = []
 
 
 const addMovie = () => {
@@ -19,6 +20,7 @@ const backdropToggle = () => {
 const cancelBTN = () => {
     modal.classList.remove("visible")
     backdrop.classList.remove ("visible")
+    clear_input()
 }
 
 const backdropHide = () => {
@@ -37,7 +39,14 @@ const addBTN = () => {
             if(movieRating < 1 || movieRating > 5) {
                 alert ("Please enter movie rating from 1 to 5")
             } else {
-                alert ("success")
+                const details_movie = {
+                    movie_Title: movieTitle,
+                    movie_Image: movieImage,
+                    movie_Rating: movieRating
+
+                    
+                }
+                movieDB.push(details_movie)
             }
         }else {
             alert ("Kindly add a movie URL")
@@ -46,8 +55,20 @@ const addBTN = () => {
         alert ("Kindly add a movie title")
     }
 
+    clear_input()
+
+    
 
 }
+
+const clear_input = () => {
+    movieTitle = document.querySelector("#title").value = ""
+    movieImage = document.querySelector("#image-url").value = ""
+    movieRating = document.querySelector("#rating").value = ""
+
+}
+
+
 
 movieBtn.addEventListener("click", addMovie)
 backdrop.addEventListener("click", backdropHide)
