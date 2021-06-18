@@ -32,18 +32,16 @@ const addBTN = () => {
     let movieImage = document.querySelector("#image-url").value.trim()
     let movieRating = document.querySelector("#rating").value.trim()
 
-    if (title !== "") {
+    if (movieTitle !== "") {
         if(movieImage !== "") {
-            if(rating !=="") {
-
+            if(movieRating < 1 || movieRating > 5) {
+                alert ("Please enter movie rating from 1 to 5")
             } else {
-                alert ("Kindly add a movie rating")
+                alert ("success")
             }
-
         }else {
-            alert ("Kindly add an URL")
+            alert ("Kindly add a movie URL")
         }
-
     } else {
         alert ("Kindly add a movie title")
     }
