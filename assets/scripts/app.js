@@ -3,15 +3,21 @@ let movieBtn = document.querySelector(".add-movie")
 let backdrop = document.querySelector ("#backdrop")
 let cancelBtn = modal.querySelector (".btn--passive")
 let addBtn = modal.querySelector (".btn--success")
+const movieUL = document.getElementById("movie-list")
+
+
+
 let movieDB = []
 
-
+const disPlay = () => {
+    if (movieDB.length > 0){
+        document.getElementById ("entry-text").style.display = "none"
+    }
+}
 const addMovie = () => {
     
     modal.classList.add("visible")
     backdropToggle()
-    disPlay()
-    movieRendering ()
 }
 
 const backdropToggle = () => {
@@ -49,6 +55,7 @@ const addBTN = () => {
                     
                 }
                 movieDB.push(details_movie)
+                
             }
         }else {
             alert ("Kindly add a movie URL")
@@ -58,6 +65,12 @@ const addBTN = () => {
     }
 
     clear_input()
+    backdropHide()
+    cancelBTN()
+    disPlay ()
+    movieRendering(movieDB)
+    
+
 
     
 
@@ -80,28 +93,22 @@ cancelBtn.addEventListener("click", cancelBTN)
 addBtn.addEventListener("click", addBTN)
 
 
-const disPlay = () => {
-    if (movieDB.length > 0){
-        document.getElementById ("entry-text").style.display = "none"
-    }
-}
 
-const movieRendering = (movieTitle, movieImage, movieRating) => {
+
+const movieRendering = (movieObj) => {
     const listMovie = document.createElement("li");
     listMovie.className = "movie-element"
-
     listMovie.innerHTML = `
         <div class="movie-element__image">
-            <img src="${movieImage}" alt="${movieTitle}>
+            <img src="${movieObj.movie_Image}"/>
         </div>
 
         <div class="movie-element__info">
-            <h2> ${movieTitle} </h2>
-            <p> ${movieRating}/5 stars </p>
-        </div>
-
-        document.getElementById("movie-list").appendChild(listMovie)
+            <h2> ${movieObj.movie_Title} </h2>
+            <p> ${movieObj.movie_Rating} stars </p>
+        </div>   
     `
+    movieUL.append(listMovie)
 
 
 }
